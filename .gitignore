@@ -1,4 +1,5 @@
 dhcpWeb-api/node_modules/
+dhcpWeb-api/package-lock.json
 html/dhcpWeb/node_modules/
 html/estoque/ext/
 html/font-awesome/
