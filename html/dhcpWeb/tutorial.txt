@@ -1,0 +1,38 @@
+##node npm
+
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs npm
+
+
+####isc
+sudo apt install isc-dhcp-server
+
+nano /etc/default/isc-dhcp-server
+
+INTERFACES="eth0"
+
+
+####webadmin
+sudo nano /etc/apt/sources.list
+Then add this line to the bottom of the file to add the new repository:
+
+/etc/apt/sources.list
+ . . . 
+deb http://download.webmin.com/download/repository sarge contrib
+Save the file and exit the editor.
+
+Next, add the Webmin PGP key so that your system will trust the new repository:
+
+wget http://www.webmin.com/jcameron-key.asc
+sudo apt-key add jcameron-key.asc
+Next, update the list of packages to include the Webmin repository:
+
+sudo apt-get update 
+Then install Webmin:
+
+sudo apt-get install webmin
+
+
+#sudoers
+
+opt      ALL = (root) NOPASSWD: /etc/init.d/isc-dhcp-server

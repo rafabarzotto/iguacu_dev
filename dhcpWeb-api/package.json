@@ -1,0 +1,32 @@
+{
+  "name": "mobile-radius-azure",
+  "version": "1.0.0",
+  "description": "Azure Back-end",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafabarzotto/mobile-radius-azure.git"
+  },
+  "author": "Rafael Barzotto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafabarzotto/mobile-radius-azure/issues"
+  },
+  "homepage": "https://github.com/rafabarzotto/mobile-radius-azure#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.7.1",
+    "debug": "^2.2.0",
+    "express": "^4.14.0",
+    "express-myconnection": "^1.0.4",
+    "formidable": "^1.2.1",
+    "getmodule": "^1.0.0",
+    "morgan": "^1.7.0",
+    "mysql": "^2.11.1",
+    "node-uuid": "^1.4.8",
+    "path": "^0.12.7"
+  }
+}

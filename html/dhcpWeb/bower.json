@@ -1,0 +1,32 @@
+{
+  "name": "dhcpWeb",
+  "authors": [
+    "Rafael Barzotto <rafabarzotto@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "rdash-ui": "1.0.*",
+    "angular-cookies": "~1.5.0",
+    "angular-bootstrap": "2.5.0",
+    "angular-ui-router": "^1.0.18",
+    "bootstrap": "~3.3.7",
+    "font-awesome": "~5.0.13",
+    "angular": "^1.7.0",
+    "angular-toastr": "^2.1.1",
+    "angular-animate": "^1.7.0",
+    "angular-ui-mask": "^1.8.7",
+    "ngstorage": "^0.3.11",
+    "angular-spinner": "^1.0.1",
+    "ng-table": "^3.0.1"
+  }
+}

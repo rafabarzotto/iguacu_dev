@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="ext/packages/ext-theme-classic/build/resources/ext-theme-classic-all.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/portal.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/app.css">
+    <script type="text/javascript" src="ext/ext-all.js"></script>
+    <script type="text/javascript">
+    Ext.require([
+        'Ext.grid.*',
+        'Ext.tab.*',
+        'Ext.window.*',
+        'Ext.tip.*',
+        'Ext.data.*',
+        'Ext.panel.*',
+        'Ext.Action',
+        'Ext.tree.*',
+        'Ext.layout.container.Border',
+        'ux.basePagingTbar',
+        'ux.grid.Printer',
+        'Ext.grid.feature.Grouping'
+    ]);
+
+
+    Ext.onReady(function() {
+
+	var op = 'Todos';
+	
+	function onItemCheck(item, checked){
+	   if(checked){
+ 	    op = item.text;
+          }
+	}
+
+        Ext.define('Estoque', {
+            extend: 'Ext.data.Model',
+
+            fields: ['id', 'Descricao', 'Cls', 'Est', 'Estoque', 'Extra', 'Saldo'],
+
+            proxy: {
+                type: 'ajax',
+                url: 'php/estoque/listaEstoquePhp7.php',
+
+                reader: {
+                    type: 'json',
+                    root: 'data'
+                }
+            }
+
+        });
+
+	Ext.define('ComboClasses', {
+            extend: 'Ext.data.Model',
+
+            fields: ['Cls', 'descricao'],
+
+            proxy: {
+                type: 'ajax',
+                url: 'php/estoque/comboClasses.php',
+
+                reader: {
+                    type: 'json',
+                    root: 'data'
+                }
+            }
+        });
+
+        Ext.define('updateTime', {
+            extend: 'Ext.data.Model',
+
+            fields: ['atualizacao'],
+
+            proxy: {
+                type: 'ajax',
+                url: 'php/estoque/updateTime.php',
+
+                reader: {
+                    type: 'json',
+                    root: 'data'
+                }
+            }
+
+        });
+
+        Ext.define('CentroDeCustoModel', {
+            extend: 'Ext.data.Model',
+            fields: ['cod', 'name', 'local'],
+
+            proxy: {
+                type: 'ajax',
+                url: 'php/estoque/listaCc.php',
+                reader: {
+                    type: 'json',
+                    root: 'data'
+                }
+            }
+
+        });
+
+        var CentroDeCustoStore = Ext.create('Ext.data.Store', {
+            storeId: 'centrodecustostore',
+            model: 'CentroDeCustoModel',
+            groupField: 'local',
+            autoLoad: { start: 0, limit: 25 }
+
+        });
+
+        var groupingFeature = Ext.create('Ext.grid.feature.Grouping', {
+                groupHeaderTpl: '{columnName}: {name} ({rows.length} Item{[values.rows.length > 1 ? "s" : ""]})',
+                hideGroupedHeader: true,
+                startCollapsed: true,
+                id: 'CentroDeCustoGrouping'
+            }),
+            groups = CentroDeCustoStore.getGroups(),
+            len = groups.length,
+            i = 0,
+            toggleMenu = [],
+            toggleGroup = function(item) {
+                var groupName = item.text;
+                if (item.checked) {
+                    groupingFeature.expand(groupName, true);
+                } else {
+                    groupingFeature.collapse(groupName, true);
+                }
+            };
+
+        var gridCc = Ext.create('Ext.grid.Panel', {
+            collapsible: true,
+            frame: true,
+            store: CentroDeCustoStore,
+            width: 600,
+            height: 400,
+            title: 'Centro De Custos',
+            resizable: true,
+            features: [groupingFeature],
+            viewConfig: {
+
+            },
+            columns: [{
+                    text: 'Código',
+                    witdth: 15,
+                    dataIndex: 'cod'
+                },
+                {
+                    text: 'Name',
+                    flex: 1,
+                    dataIndex: 'name'
+                }, {
+                    text: 'Local',
+                    flex: 1,
+                    dataIndex: 'local'
+                }
+            ]
+        });
+
+        win = Ext.create('widget.window', {
+            title: 'Consulta Centro de Custo',
+            header: {
+                titlePosition: 2,
+                titleAlign: 'center'
+            },
+            closable: true,
+            closeAction: 'hide',
+            maximizable: true,
+            width: 700,
+            minWidth: 350,
+            height: 500,
+            tools: [{ type: 'pin' }],
+            layout: {
+                type: 'border',
+                padding: 5
+            },
+            items: [{
+                region: 'west',
+                title: 'Navegação',
+                width: 200,
+                split: true,
+                collapsed: true,
+                collapsible: true,
+                floatable: false
+            }, {
+                region: 'center',
+                xtype: 'tabpanel',
+                items: [{ xtype: gridCc }]
+            }]
+        });
+
+        var store = Ext.create('Ext.data.Store', {
+            model: 'Estoque',
+            autoLoad: { start: 0, limit: 25 }
+        });
+
+	var storeComboClasses = Ext.create('Ext.data.Store', {
+            model: 'ComboClasses',
+            autoLoad: true
+        });
+
+        var storeUpdateTime = Ext.create('Ext.data.Store', {
+            model: 'updateTime',
+            autoLoad: { start: 0, limit: 25 }
+        });
+
+        var buyAction = Ext.create('Ext.Action', {
+            iconCls: 'icon-date',
+            text: 'Consulta Centro de Custo',
+            handler: function(widget, event) {
+                win.show();
+            }
+        });
+
+	 var buscaClasse = Ext.create('Ext.Button', {
+	    iconCls: 'key-go',
+	    iconAlign: 'left',
+	    padding: 1,
+	    scale: 'medium',
+            text: 'Buscar Classe',
+            handler: function(widget, event) {
+                console.log('ok');
+		store.load({ params: { desc: null, cod: null, extra: null, op: op, cls: comboClasses.getValue() } }).loadPage(1);
+            }
+        });
+
+
+        var buttonPrint = Ext.create('Ext.Action', {
+            iconCls: 'icon-print',
+            text: 'Imprimir',
+            handler: function(widget, event) {
+                //var grid = Ext.ComponentQuery.query('consultamaterial gridmaterial')[0];
+                ux.grid.Printer.printAutomatically = false;
+                ux.grid.Printer.print(grid);
+            }
+        });
+
+	var comboClasses = Ext.create('Ext.form.ComboBox', {
+	    width: 400,
+            store: storeComboClasses,
+	    emptyText: 'Escolha a Classe e Aperte Buscar!',
+            queryMode: 'local',
+            editable: false,
+            valueField: 'Cls',
+	    tpl: Ext.create('Ext.XTemplate',
+        	'<tpl for=".">',
+            	'<div class="x-boundlist-item">{Cls} - {descricao}</div>',
+        	'</tpl>'
+            ),
+	    displayTpl: Ext.create('Ext.XTemplate',
+        	'<tpl for=".">',
+            	'{Cls} - {descricao}',
+        	'</tpl>'
+    	    ),
+	    listeners: { 
+               select: function(combo, records) {
+                   //console.log(records);
+               }
+	    }
+	});
+
+	var buttonXls = Ext.create('Ext.Action', {
+            iconCls: 'icon-xls',
+            text: 'Exportar Excel',
+            handler: function(widget, event) {
+                console.log('click');
+                window.open('data:application/vnd.ms-excel;base64,' + Base64.encode(grid.getExcelXml()));
+            }
+        });
+
+
+
+	var menu = Ext.create('Ext.menu.Menu', {
+        id: 'mainMenu',
+        items: [buttonPrint,
+		'-',
+		{
+                text: 'Opções',
+                menu: {
+                    items:[
+			{
+			    text: 'Todos',
+                            checked: true,
+                            group: 'gruposaldo',
+                            checkHandler: onItemCheck
+			},
+                        {
+                            text: 'Itens Com Saldo',
+                            checked: false,
+			    group: 'gruposaldo',
+                            checkHandler: onItemCheck
+                        },
+			{   text: 'Itens Sem Saldo',
+                            checked: false,
+                            group: 'gruposaldo',
+                            checkHandler: onItemCheck
+			}
+                    ]
+                }
+           }
+          ]
+        });
+
+        var grid = Ext.create('Ext.grid.Panel', {
+            bufferedRenderer: false,
+            store: store,
+            cls: 'my-grid',
+            viewConfig: {
+                getRowClass: function(record, index, rowParams) {
+                    return (index % 2 == 0) ? 'grid-row1' : 'grid-row2';
+                }
+            },
+
+            columns: [
+                { text: 'Cod', width: 3, dataIndex: 'id' },
+                { text: 'Descricao', width: 15, type: 'string', dataIndex: 'Descricao', 
+	    items: {
+            xtype: 'textfield',
+            width: 30,
+            //height: 10,
+            flex: 1,
+            margin: 2,
+            enableKeyEvents: true,
+            listeners: {
+                keyup: function() {
+                    //var store = this.up('gridordensemitidas').store;
+                    store.clearFilter();
+                    if (this.value) {
+                        store.filter({
+                            property: 'Descricao',
+                            value: this.value,
+                            anyMatch: true,
+                            caseSensitive: false
+                        });
+                    }
+                },
+                buffer: 500
+            }
+        } 
+		},
+		{ text: 'Classe', width: 2, type: 'string', dataIndex: 'Cls' },
+                { text: 'Est', width: 3, type: 'string', dataIndex: 'Est' },
+                { text: 'Estoque', width: 5, type: 'string', dataIndex: 'Estoque' },
+                {
+                    text: 'Saldo',
+                    width: 3,
+                    type: 'string',
+                    dataIndex: 'Saldo',
+                    renderer: function(val) {
+                        if (val != 0) {
+                            return '<span style="color:' + '#006400' + ';">' + val + '</span>';
+                        } else if (val == 0) {
+                            return '<span style="color:' + '#cf4c35' + ';">' + val + '</span>';
+                        }
+                        return val;
+                    },
+                },
+                {
+                    menuDisabled: true,
+                    xtype: 'actioncolumn',
+                    width: 2,
+                    items: [{
+                        iconCls: 'icon-report',
+                        tooltip: 'Procurar Imagem',
+                        handler: function(grid, rowIndex, colIndex) {
+                            var rec = grid.getStore().getAt(rowIndex);
+                            var str = rec.data.Descricao;
+                            window.open('http://www.google.com.br/search?tbm=isch&q=' + str, '_blank');
+                        }
+                    }]
+                }
+            ],
+            plugins: [{
+                ptype: 'rowexpander',
+                rowBodyTpl: new Ext.XTemplate(
+                    '<p><b>Descrição Extra:</b> {Extra}</p>'
+                )
+            }],
+            forceFit: true,
+            width: 1024,
+            height: 550,
+            split: true,
+            dockedItems: [{
+		    xtype: 'toolbar',
+		    padding: 5,
+		    dock: 'top',
+		    items: [{
+            		text:'Arquivo',
+            		iconCls: 'icon-folder',
+            		menu: menu
+        		},'-', 
+			buyAction,'-',comboClasses,buscaClasse,
+			'->',
+			{
+                        xtype: 'textfield',
+                        labelAlign: 'right',
+                        fieldLabel: 'Atualizado em',
+                        id: 'atualizacao',
+                        readOnly: true,
+                        itemId: 'atualizacao'
+                    	}]
+		    },{
+                    xtype: 'toolbar',
+                    dock: 'top',
+                    items: [{
+                            xtype: 'textfield',
+                            fieldLabel: 'Código',
+		            labelWidth: 45,
+			    labelPad: 0,
+			    padding: 5,
+                            id: 'cod',
+                            listeners: {
+                                specialkey: function(field, e) {
+                                    if (e.getKey() == e.ENTER) {
+                                        fieldDesc = Ext.ComponentQuery.query('textfield#desc')[0];
+                                        fieldExtra = Ext.ComponentQuery.query('textfield#extra')[0];
+                                        fieldDesc.setValue('');
+                                        fieldExtra.setValue('');
+                                        store.load({ params: { cod: field.value, desc: null, extra: null } }).loadPage(1);
+                                    }
+                                }
+                            }
+                        }, '-',
+                        {
+                            xtype: 'textfield',
+                            fieldLabel: 'Descrição',
+                            width: 519,
+			    labelWidth: 58,
+                            labelPad: 0,
+                            padding: 5,
+                            id: 'desc',
+                            listeners: {
+                                specialkey: function(field, e) {
+                                    if (e.getKey() == e.ENTER) {
+                                        fieldCod = Ext.ComponentQuery.query('textfield#cod')[0];
+                                        fieldExtra = Ext.ComponentQuery.query('textfield#extra')[0];
+                                        fieldCod.setValue('');
+                                        fieldExtra.setValue('');
+					comboClasses.setValue('');
+                                        store.load({ params: { desc: field.value, cod: null, extra: null, op: op, cls: comboClasses.getValue() } }).loadPage(1);
+                                    }
+                                }
+                            }
+                        }, '-',
+                        {
+                            xtype: 'textfield',
+                            fieldLabel: 'Detalhes',
+			    width: 260,
+                            labelWidth: 58,
+                            labelPad: 0,
+                            padding: 5,
+                            id: 'extra',
+                            listeners: {
+                                specialkey: function(field, e) {
+                                    if (e.getKey() == e.ENTER) {
+                                        fieldCod = Ext.ComponentQuery.query('textfield#cod')[0];
+                                        fieldDesc = Ext.ComponentQuery.query('textfield#desc')[0];
+                                        fieldCod.setValue('');
+                                        fieldDesc.setValue('');
+                                        store.load({ params: { extra: field.value, cod: null, desc: null } }).loadPage(1);
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    xtype: 'basePagingTbar',
+                    dock: 'top',
+                    store: store,
+                    saveParamsOnLoad: true,
+                    displayInfo: true
+                }
+            ]
+        });
+
+        Ext.create('Ext.Panel', {
+            renderTo: document.body,
+            frame: true,
+            title: 'Iguaçu Celulose',
+            width: '100%',
+            height: 650,
+            layout: {
+                type: 'border',
+                padding: '0 0 0 0'
+            },
+            items: [{
+                id: 'app-header',
+                xtype: 'box',
+                region: 'north',
+                height: 40,
+                html: 'Consulta Estoque'
+            }, {
+                xtype: 'container',
+                region: 'center',
+                layout: 'border',
+                items: [{
+                    id: 'app-options',
+                    region: 'west'
+                }, {
+                    id: 'app-portal',
+                    xtype: grid,
+                    region: 'center'
+                }]
+            }]
+        });
+        store.load();
+	var txtAtt = Ext.ComponentQuery.query('textfield#atualizacao')[0];
+        storeUpdateTime.load({
+            callback: function (records, options, success) {
+                //console.log(records);
+                //var jsonStr = Ext.JSON.encode(records[0].raw);
+                //var jsonObj = Ext.JSON.decode(jsonStr);
+                //console.log(records[0].data.atualizacao);
+		txtAtt.setValue(records[0].data.atualizacao);
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

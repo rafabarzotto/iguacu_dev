@@ -1,0 +1,15 @@
+angular.module('RDash', ['ui.bootstrap',
+	'ui.router',
+	'ngStorage',
+	'ngCookies',
+	'ui.mask',
+	'angularSpinner',
+	'starter.controllers',
+	'starter.services',
+	'starter.alertService',
+	'starter.authService',
+	'starter.authController',
+	'ngTable',
+	'toastr',
+	'ngAnimate'
+]);

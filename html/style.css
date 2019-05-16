@@ -1,0 +1,46 @@
+#my-div {
+background-color: lightgrey;
+width: 200px;
+height: 200px;
+}
+
+a.fill-div {
+text-align: center;
+display: block;
+height: 100%;
+width: 100%;
+text-decoration: none;
+}
+
+.starter-template {
+  padding-top: 90px;
+  text-align: center;
+}
+
+  body {
+    padding-top: 60px;
+  }
+  @media (max-width: 980px) {
+    body {
+      padding-top: 60px;
+    }
+  }
+
+.btn-default {
+	
+	background-color: #B2BABB;
+
+	color:#FFF;
+
+	border-color: #2F3E48;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+
+	background-color: #85929E;
+
+	color:#FFF;
+
+	border-color: #31347B;
+}
+

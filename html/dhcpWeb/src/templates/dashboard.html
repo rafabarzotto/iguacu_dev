@@ -1,0 +1,123 @@
+<span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <rd-widget>
+            <rd-widget-body>
+                <div class="widget-icon green pull-left">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="title">254</div>
+                <div class="comment">Hosts</div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <rd-widget>
+            <rd-widget-body>
+                <div class="widget-icon red pull-left">
+                    <i class="fa fa-tasks"></i>
+                </div>
+                <div class="title">{{dash[0].qtdDhcpCad}}</div>
+                <div class="comment">DHCP Client</div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <rd-widget>
+            <rd-widget-body>
+                <div class="widget-icon orange pull-left">
+                    <i class="fa fa-sitemap"></i>
+                </div>
+                <div class="title">{{dash[0].qtdMacCad}}</div>
+                <div class="comment">MAC Cad</div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <rd-widget>
+            <rd-widget-body>
+                <div class="widget-icon blue pull-left">
+                    <i class="fa fa-support"></i>
+                </div>
+                <div class="title">{{dash[0].qtdIpLivre}}</div>
+                <div class="comment">IPs Livres</div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <rd-widget>
+            <rd-widget-header icon="fa-plus" title="Status do Servidor DHCP">
+                <button class="btn btn-sm btn-warning" ng-click="statusServerDHCP('status')">Atualizar</button>
+            </rd-widget-header>
+            <rd-widget-body>
+                <div class="message">
+                    <div class="{{dhcpd == 'DHCP Server Ligado!' && 'alert alert-success' || 'alert alert-danger'}}">{{dhcpd}}</div>
+                </div>
+            </rd-widget-body>
+        </rd-widget>
+        <br>
+        <button type="button" class="btn btn-info btn-lg btn-block" ng-click="gerarDhcp()">Aplicar as Configurações</button>
+        <button type="button" class="btn btn-success btn-lg btn-block" ng-click="statusServerDHCP('start')">Inicar Serviço</button>
+        <button type="button" class="btn btn-danger btn-lg btn-block" ng-click="statusServerDHCP('stop')">Parar Serviço</button>
+    </div>
+    <div class="col-lg-6">
+        <rd-widget>
+            <rd-widget-header icon="fa-users" title="Usuários">
+            </rd-widget-header>
+            <rd-widget-body classes="medium no-padding">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th>Usuário</th>
+                                <th>Role</th>
+                                <th>Senha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>admin</td>
+                                <td>Super Admin</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </rd-widget-body>
+            <rd-widget>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <rd-widget>
+            <rd-widget-header icon="fa-tasks" title="Quantidade por Tipo de Equipamento">
+            </rd-widget-header>
+            <rd-widget-body classes="medium no-padding">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr ng-repeat="x in qtdTipo">
+                                <td>{{x.tipo}}</td>
+                                <td>{{x.qtd}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+    <div class="col-lg-6">
+        <rd-widget>
+            <rd-widget-header icon="fa-cog fa-spin" title="Loading Directive">
+                <a href="http://tobiasahlin.com/spinkit/" target="_blank">SpinKit</a>
+            </rd-widget-header>
+            <rd-widget-body>
+                <rd-loading></rd-loading>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+</div>
