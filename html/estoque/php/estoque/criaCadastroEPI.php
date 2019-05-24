@@ -1,6 +1,12 @@
 <?php
 
 
+    header('Access-Control-Allow-Origin: *');
+
+    header('Access-Control-Allow-Methods: GET, POST');
+
+    header("Access-Control-Allow-Headers: X-Requested-With");
+
     $info = $_POST['data'];
     $data = json_decode(stripslashes($info));
     $RE = $data->RE;
@@ -20,7 +26,7 @@
         $pdo->exec("set names utf8");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $pdo->prepare('INSERT INTO (RE, Colaborador, Cargo, Setor, EPI, Data, Responsavel) VALUES :RE, :Colaborador, :Cargo, :Setor, :EPI, :Data, :Responsavel');
+        $stmt = $pdo->prepare('INSERT INTO ControleEPI (RE, Colaborador, Cargo, Setor, EPI, Data, Responsavel) VALUES :RE, :Colaborador, :Cargo, :Setor, :EPI, :Data, :Responsavel');
         $stmt->execute(array(
             ':RE' => $RE,
             ':Colaborador' => $Colaborador,
