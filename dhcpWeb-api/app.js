@@ -12,7 +12,7 @@ const fs = require('fs');
 
 var index = require('./routes/index');
 var lembretes = require('./routes/lembretes');
-var veiculos = require('./routes/veiculos');
+var estoque = require('./routes/estoque');
 var usuarios = require('./routes/usuarios');
 var hosts = require('./routes/hosts');
 var dhcpServer = require('./routes/dhcpserver');
@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
     connection(mysql,{
-        host: 'localhost',
+        host: '192.168.4.1',
         user: 'opt',
         password : 'qwe123',
         port : 3306, //port mysql
@@ -39,7 +39,7 @@ app.use(
 
 app.use('/', index);
 app.use('/', lembretes);
-app.use('/', veiculos);
+app.use('/', estoque);
 app.use('/', usuarios);
 app.use('/', hosts);
 app.use('/', dhcpServer);

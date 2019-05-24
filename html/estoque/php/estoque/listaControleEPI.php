@@ -6,15 +6,17 @@
 
     header("Access-Control-Allow-Headers: X-Requested-With");
 
-    //$start = $_REQUEST['start'];
-    //$limit = $_REQUEST['limit'];
+    $page  = $_REQUEST['page'];
+    $start = $_REQUEST['start'];
+    $limit = $_REQUEST['limit'];
 
+    //$PDO = new PDO('mysql:host=192.168.4.1;dbname=iguacu', 'opt', 'qwe123');
     $PDO = new PDO('mysql:host=localhost;dbname=iguacu', 'opt', 'qwe123');
     $PDO->exec("set names utf8");
 
-    $sql = "SELECT atualizacao FROM updateTime";
-    $sqlTotal = "SELECT count(*) as id FROM updateTime";
-
+    $sql = "SELECT ID, RE, Colaborador, Cargo, Setor, EPI, Data, Responsavel FROM ControleEPI LIMIT $start, $limit";
+    $sqlTotal = "SELECT count(*) as ID FROM ControleEPI";
+   
 
 	$result = $PDO->query($sql);
 	$datas = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -28,7 +30,7 @@
 		"total" => $total,
 		"data" => $datas
 	);
-
+	
 	echo json_encode($status, JSON_UNESCAPED_UNICODE);
 
 ?>
