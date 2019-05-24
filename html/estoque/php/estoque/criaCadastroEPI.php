@@ -27,15 +27,26 @@
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt = $pdo->prepare('INSERT INTO ControleEPI (RE, Colaborador, Cargo, Setor, EPI, Data, Responsavel) VALUES :RE, :Colaborador, :Cargo, :Setor, :EPI, :Data, :Responsavel');
-        $stmt->execute(array(
-            ':RE' => $RE,
-            ':Colaborador' => $Colaborador,
-            ':Cargo' => $Cargo,
-            ':Setor' => $Setor,
-            ':EPI' => $EPI,
-            ':Data' => $Data,
-            ':Responsavel' => $Responsavel
-        ));
+
+        $stmt->bindParam(:RE, $RE);
+        $stmt->bindParam(:Colaborador, $Colaborador);
+        $stmt->bindParam(:Cargo, $Cargo);
+        $stmt->bindParam(:Setor, $Setor);
+        $stmt->bindParam(:EPI, $EPI);
+        $stmt->bindParam(:Data, $Data);
+        $stmt->bindParam(:Responsavel, $Responsavel);
+
+        // $stmt->execute(array(
+        //     ':RE' => $RE,
+        //     ':Colaborador' => $Colaborador,
+        //     ':Cargo' => $Cargo,
+        //     ':Setor' => $Setor,
+        //     ':EPI' => $EPI,
+        //     ':Data' => $Data,
+        //     ':Responsavel' => $Responsavel
+        // ));
+
+        $stmt->execute();
 
         echo $stmt->rowCount();
 
