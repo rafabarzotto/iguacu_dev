@@ -1,0 +1,52 @@
+{
+    "name": "TaskList",
+    "settings": {
+        "cmd": {
+            "license": "commercial"
+        },
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "urlPrefix": "",
+        "exportPath": "C:/Users/Cadore/Desktop",
+        "lockUrlPrefix": true,
+        "buildShouldOverwriteIndex": true,
+        "generateArchitectVersion": true,
+        "spacesToIndent": 4,
+        "lineEnding": "LF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "installStatus": "Not Installed"
+    },
+    "xdsVersion": "3.2.0",
+    "xdsBuild": 320,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "ext51",
+    "viewOrderMap": {
+        "view": [
+            "f1dd9304-a4aa-4ce2-afd6-4d9266edd4ad",
+            "a5fc9637-ffb1-40d1-9d30-8126142ce9aa",
+            "5184da98-acf5-4641-8f07-3775610a92cd"
+        ],
+        "store": [],
+        "controller": [],
+        "model": [
+            "f8f3fc51-aabb-4b35-91c6-fe6d47483598"
+        ],
+        "resource": [
+            "5f6d6b61-9450-408a-ad81-729fab7af2c7",
+            "55b779e3-08a1-4b31-b3f8-9a33b5af3b49",
+            "d4ddcc41-ab22-4791-ad5b-61251144f218",
+            "46b5d3f4-88da-40f1-bbdd-81de250a83d5"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}
