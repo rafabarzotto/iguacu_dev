@@ -14,7 +14,7 @@
     $PDO = new PDO('mysql:host=localhost;dbname=iguacu', 'opt', 'qwe123');
     $PDO->exec("set names utf8");
 
-    $sql = "SELECT ID, RE, Colaborador, Cargo, Setor, EPI, Data, Responsavel FROM ControleEPI LIMIT $start, $limit";
+    $sql = "SELECT ID, RE, Colaborador, Cargo, Setor, EPI, Data, Responsavel, stamp FROM ControleEPI LIMIT $start, $limit";
     $sqlTotal = "SELECT count(*) as ID FROM ControleEPI";
    
 
