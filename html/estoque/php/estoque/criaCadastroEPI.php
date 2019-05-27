@@ -11,13 +11,6 @@
 
     $info = $_POST['data'];
     $json = json_decode($info, JSON_UNESCAPED_UNICODE);
-    $RE = $json->RE;
-    $Colaborador = $json->Colaborador;
-    $Cargo = $json->Cargo;
-    $Setor = $json->Setor;
-    $EPI = $json->EPI;
-    $Data = $json->Data;
-    $Responsavel = $json->Responsavel;
 
         $timestamp = date("d-m-Y H:i:s");
 
@@ -28,13 +21,13 @@
         $stmt = $pdo->prepare('INSERT INTO ControleEPI (RE, Colaborador, Cargo, Setor, EPI, Data, Responsavel, stamp) VALUES :RE, :Colaborador, :Cargo, :Setor, :EPI, :Data, :Responsavel', ':stamp');
 
         $stmt->execute(array(
-            ':RE' => $RE,
-            ':Colaborador' => $Colaborador,
-            ':Cargo' => $Cargo,
-            ':Setor' => $Setor,
-            ':EPI' => $EPI,
-            ':Data' => $Data,
-            ':Responsavel' => $Responsavel,
+            ':RE' => $json['RE'],
+            ':Colaborador' => $json['Colaborador'],
+            ':Cargo' => $json['Cargo'],
+            ':Setor' => $json['Setor'],
+            ':EPI' => $json['EPI'],
+            ':Data' => $json'Data'],
+            ':Responsavel' => $json['Responsavel'],
             ':stamp' => $timestamp
         ));
 
