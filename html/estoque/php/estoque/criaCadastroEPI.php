@@ -5,7 +5,9 @@
 
     header('Access-Control-Allow-Methods: GET, POST');
 
-    header("Access-Control-Allow-Headers: X-Requested-With");
+    header('Access-Control-Allow-Headers: X-Requested-With');
+
+    header('Access-Control-Allow-Headers: *');
 
     $info = $_POST['data'];
     $data = json_decode(stripslashes($info));
@@ -17,47 +19,25 @@
     $Data = $data->Data;
     $Responsavel = $data->Responsavel;
 
-    function setUpdateTime(Pdo $pdo){
-
-    try {
-
         $timestamp = date("d-m-Y H:i:s");
 
+        $pdo = new PDO("mysql:host=localhost;dbname=iguacu", "opt", "qwe123");
         $pdo->exec("set names utf8");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt = $pdo->prepare('INSERT INTO ControleEPI (RE, Colaborador, Cargo, Setor, EPI, Data, Responsavel) VALUES :RE, :Colaborador, :Cargo, :Setor, :EPI, :Data, :Responsavel');
 
-        $stmt->bindParam(:RE, $RE);
-        $stmt->bindParam(:Colaborador, $Colaborador);
-        $stmt->bindParam(:Cargo, $Cargo);
-        $stmt->bindParam(:Setor, $Setor);
-        $stmt->bindParam(:EPI, $EPI);
-        $stmt->bindParam(:Data, $Data);
-        $stmt->bindParam(:Responsavel, $Responsavel);
-
-        // $stmt->execute(array(
-        //     ':RE' => $RE,
-        //     ':Colaborador' => $Colaborador,
-        //     ':Cargo' => $Cargo,
-        //     ':Setor' => $Setor,
-        //     ':EPI' => $EPI,
-        //     ':Data' => $Data,
-        //     ':Responsavel' => $Responsavel
-        // ));
-
-        $stmt->execute();
-
-        echo $stmt->rowCount();
-
-        } catch(PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
-    }
+        $stmt->execute(array(
+            ':RE' => $RE,
+            ':Colaborador' => $Colaborador,
+            ':Cargo' => $Cargo,
+            ':Setor' => $Setor,
+            ':EPI' => $EPI,
+            ':Data' => $Data,
+            ':Responsavel' => $Responsavel
+        ));
 
 
-    $Pdo = new PDO("mysql:host=localhost;dbname=iguacu", "opt", "qwe123");
 
-	setUpdateTime($Pdo);
 ?>
 
