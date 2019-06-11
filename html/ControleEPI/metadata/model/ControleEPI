@@ -1,0 +1,145 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "controleepi",
+        "designer|userClassName": "ControleEPI"
+    },
+    "designerId": "f8f3fc51-aabb-4b35-91c6-fe6d47483598",
+    "cn": [
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "id"
+            },
+            "name": "MyString4",
+            "designerId": "9014c3a9-4d34-448a-9eae-68ad225314e6"
+        },
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "RE"
+            },
+            "name": "MyString5",
+            "designerId": "6e5317ab-cc35-4332-bbb5-0d82f2fb4277"
+        },
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "Colaborador"
+            },
+            "name": "MyString6",
+            "designerId": "aca79fbd-33ac-4977-b820-853afb968691"
+        },
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "Cargo"
+            },
+            "name": "MyString7",
+            "designerId": "5a127815-f095-478f-8b01-d1b30e4bf2e3"
+        },
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "Setor"
+            },
+            "name": "MyString8",
+            "designerId": "3e419c64-614b-40a9-ab45-b3fc9ad298b0"
+        },
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "EPI"
+            },
+            "name": "MyString9",
+            "designerId": "bdc182c2-e105-444f-ba85-9bf387d2ffcd"
+        },
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "Data"
+            },
+            "name": "MyString10",
+            "designerId": "b625f630-d3d3-4964-bc69-0ef7194c6129"
+        },
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "Responsavel"
+            },
+            "name": "MyString11",
+            "designerId": "de3120ad-d687-4f2b-8118-d63a5d1c1cce"
+        },
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "stamp"
+            },
+            "name": "MyString",
+            "designerId": "88cb88ac-9f77-4c50-9303-9719d948b42f"
+        },
+        {
+            "type": "Ext.data.field.String",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "verificado"
+            },
+            "name": "MyString1",
+            "designerId": "d63bf287-6bdc-4a62-a2e8-f62541299e1d"
+        }
+    ]
+}

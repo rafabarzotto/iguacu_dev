@@ -1,0 +1,27 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "controllers": [
+            "MainController"
+        ],
+        "models": [
+            "ControleEPI",
+            "Colaboradores"
+        ],
+        "name": "TaskList",
+        "stores": [
+            "StoreColaboradores"
+        ],
+        "views": [
+            "Tasks",
+            "LoginForm"
+        ]
+    },
+    "name": "Application",
+    "designerId": "application"
+}

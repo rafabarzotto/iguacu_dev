@@ -1,0 +1,196 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoShow": true,
+        "closable": false,
+        "designer|userAlias": "loginform",
+        "designer|userClassName": "LoginForm",
+        "height": 170,
+        "layout": "fit",
+        "modal": true,
+        "title": "Login",
+        "width": 360
+    },
+    "name": "MyWindow",
+    "designerId": "aacada88-7368-4095-a85d-12636a8850d1",
+    "viewControllerInstanceId": "fd10c915-e8ce-4c82-93ef-696bbe691b55",
+    "viewModelInstanceId": "2763929d-cadd-4d14-9c84-b52b04361207",
+    "cn": [
+        {
+            "type": "Ext.form.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyPadding": 15,
+                "defaults": [
+                    "{",
+                    "            xtype: 'textfield',",
+                    "            anchor: '100%',",
+                    "            labelWidth: 60,",
+                    "            allowBlank: false,",
+                    "            vtype: 'alphanum',",
+                    "            minLength: 3,",
+                    "            msgTarget: 'under'",
+                    "        }"
+                ],
+                "designer|uiInterfaceName": "default",
+                "title": null
+            },
+            "name": "MyForm1",
+            "designerId": "d0b5683d-72b2-47ba-9bd2-6b24df519ca8",
+            "cn": [
+                {
+                    "type": "Ext.toolbar.Toolbar",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dock": "bottom"
+                    },
+                    "name": "MyToolbar1",
+                    "designerId": "c4da514b-c7cc-4d39-92ca-d953056f8490",
+                    "cn": [
+                        {
+                            "type": "Ext.toolbar.Fill",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null
+                            },
+                            "name": "MyFill1",
+                            "designerId": "79a9347f-4efa-4c36-8d27-37ad1fe3acb5"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "itemId": "cancel",
+                                "layout|flex": null,
+                                "text": "Cancelar"
+                            },
+                            "name": "MyButton7",
+                            "designerId": "50a476fe-26a8-4aac-b750-f08664e453f2",
+                            "cn": [
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onCancelClick",
+                                        "implHandler": [
+                                            "var win = button.up('window');",
+                                            "var form = win.down('form');",
+                                            "form.getForm().reset();",
+                                            "win.close();"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "name": "onCancelClick",
+                                    "designerId": "18f50b40-a542-4259-966e-5c57858b88bc"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "formBind": true,
+                                "itemId": "submit",
+                                "layout|flex": null,
+                                "text": "Login"
+                            },
+                            "name": "MyButton6",
+                            "designerId": "f01d889b-79f6-4bc2-8b00-c5de3c091506",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "button",
+                                            "e"
+                                        ],
+                                        "fn": "handler",
+                                        "implHandler": [
+                                            "        var formDialog = button.up('loginform');",
+                                            "        var form = button.up('form');",
+                                            "",
+                                            "      // fire custom event for the controller to handle",
+                                            "      formDialog.fireEvent('login', formDialog, form, form.getValues());"
+                                        ]
+                                    },
+                                    "name": "handler",
+                                    "designerId": "513ab8c8-2dbd-4928-9474-f154fee646c9"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Usuário",
+                        "layout|anchor": "100%",
+                        "maxLength": 30,
+                        "name": "loginUsername"
+                    },
+                    "name": "MyTextField2",
+                    "designerId": "b3e4a332-f3a9-4b40-8a1b-44e1c3084071"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "enableKeyEvents": true,
+                        "fieldLabel": "Senha",
+                        "inputType": "password",
+                        "layout|anchor": "100%",
+                        "maxLength": 30,
+                        "msgTarget": "side",
+                        "name": "loginPassword"
+                    },
+                    "name": "MyTextField6",
+                    "designerId": "8f47487d-9b24-4741-8ce6-fbecef5210da"
+                }
+            ]
+        }
+    ]
+}

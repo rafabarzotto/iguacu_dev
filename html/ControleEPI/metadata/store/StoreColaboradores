@@ -1,0 +1,46 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "designer|userClassName": "StoreColaboradores",
+        "model": "Colaboradores",
+        "storeId": "StoreColaboradores"
+    },
+    "name": "MyStore",
+    "designerId": "a0f79760-b475-47a8-941f-2aaec4d077b2",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "php/listaColaboradores.php"
+            },
+            "name": "MyAjaxProxy1",
+            "designerId": "72d9bd8f-b0e0-4af4-9090-97437858c0ba",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "data"
+                    },
+                    "name": "MyJsonReader1",
+                    "designerId": "027a2be0-5fbe-4dab-8b39-653129d2edcb"
+                }
+            ]
+        }
+    ]
+}

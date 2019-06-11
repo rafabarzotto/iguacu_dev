@@ -1,0 +1,13 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "loginform",
+        "designer|userClassName": "LoginFormViewModel"
+    },
+    "designerId": "2763929d-cadd-4d14-9c84-b52b04361207"
+}

@@ -1,0 +1,106 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "MainController"
+    },
+    "name": "MyController",
+    "designerId": "d9daa26e-b6dc-4b53-8da2-0735ec7065ca",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "init",
+                "implHandler": [
+                    "  this.control({",
+                    "   \"loginform\": {",
+                    "     login: this.onLogin",
+                    "    }",
+                    "  });"
+                ]
+            },
+            "name": "init",
+            "designerId": "adb00a28-0bd4-4603-86d5-d92c3f5d5f3a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "loginDialog",
+                    "loginForm",
+                    "loginCredentials"
+                ],
+                "fn": "onLogin",
+                "implHandler": [
+                    " var me = this;",
+                    "",
+                    "   // authenticate",
+                    "   Ext.Ajax.request({",
+                    "    url: 'resources/cred.json',",
+                    "    params: {",
+                    "     username: loginCredentials.username,",
+                    "     password: loginCredentials.password",
+                    "    },",
+                    "    success: function(response) {",
+                    "",
+                    "     // convert text response to javascript object",
+                    "     var data = Ext.decode(response.responseText);",
+                    "",
+                    "     // if server response contains \"firstName\" node, then success!",
+                    "     if (data.firstName == 'admin') {",
+                    "      // instantiate user info in global scope for easy referencing",
+                    "      TaskList.User = Ext.create(\"TaskList.user.Profile\", {",
+                    "                        firstName: data.firstName,",
+                    "                        lastName: data.lastName,",
+                    "                        roles: data.roles",
+                    "      });",
+                    "",
+                    "      // destroy login dialog",
+                    "      loginDialog.destroy();",
+                    "",
+                    "",
+                    "      Ext.Msg.alert(\"Logado com Sucesso\",",
+                    "                Ext.String.format(\"Bem Vindo {0} {1}\",",
+                    "                          TaskList.User.getFirstName(),",
+                    "                          TaskList.User.getLastName())",
+                    "      );",
+                    "",
+                    "      // load main UI",
+                    "      //Ext.create(\"TaskList.view.Viewport\");",
+                    "      Ext.getCmp('edit').enable();",
+                    "      Ext.getCmp('remove').enable();",
+                    "      Ext.getCmp('add').disable();",
+                    "      Ext.getCmp('checkVerificado').enable();",
+                    "",
+                    "",
+                    "  } else { // login failed",
+                    "    Ext.Msg.alert(\"Credenciais Inválidas\",",
+                    "                  \"Você deve digitar credenciais válidas\",",
+                    "                  function() {",
+                    "               loginForm.getForm().reset();",
+                    "                  }",
+                    "    );",
+                    "  }",
+                    " }",
+                    "});"
+                ]
+            },
+            "name": "onLogin",
+            "designerId": "18246d52-5545-4132-ba96-c8ea240d1cba"
+        }
+    ]
+}

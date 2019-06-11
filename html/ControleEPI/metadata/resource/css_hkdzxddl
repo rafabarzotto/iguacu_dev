@@ -1,0 +1,15 @@
+{
+    "type": "cssresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "css_hkdzxddl",
+        "id": "app.css",
+        "url": "resources/css/app.css"
+    },
+    "name": "css",
+    "designerId": "ed79102d-0046-4057-a549-b4c6c72c293d"
+}
