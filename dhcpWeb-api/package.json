@@ -19,7 +19,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "cors": "^2.7.1",
-    "debug": "^2.2.0",
+    "debug": "^2.6.9",
     "express": "^4.14.0",
     "express-myconnection": "^1.0.4",
     "formidable": "^1.2.1",
